@@ -177,9 +177,18 @@ public class SatelliteController {
 	}
 	
 	
+	// FUNZIONI RAPIDE
+	
 	@GetMapping("/lanciatidapiudidueanni")
 	public String lanciatiDaPiuDiDueAnni(Model model) {
 		List<Satellite> lista = satelliteService.lanciatiDaPiuDiDueAnni();
+		model.addAttribute("satellite_list_attribute", lista);
+		return "satellite/list";
+	}
+	
+	@GetMapping("/disattivatimanonrientrati")
+	public String disattivatiMaNonRientrati(Model model) {
+		List<Satellite> lista = satelliteService.disattivatiMaNonRientrati();
 		model.addAttribute("satellite_list_attribute", lista);
 		return "satellite/list";
 	}

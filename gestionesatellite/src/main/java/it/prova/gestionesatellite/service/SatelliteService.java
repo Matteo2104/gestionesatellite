@@ -18,6 +18,11 @@ public interface SatelliteService {
 
 	public void aggiorna(Satellite satellite);
 
+	
+	
+	// FUNZIONI RAPIDE
+	
 	public List<Satellite> lanciatiDaPiuDiDueAnni();
+	public List<Satellite> disattivatiMaNonRientrati();
 
 }

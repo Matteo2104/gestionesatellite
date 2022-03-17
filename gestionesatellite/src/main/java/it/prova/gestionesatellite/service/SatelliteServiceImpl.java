@@ -78,10 +78,19 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 	
 	
+	// FUNZIONI RAPIDE
+	
 	@Override
 	@Transactional
 	public List<Satellite> lanciatiDaPiuDiDueAnni() {
 		Date date = new Date();
 		return satelliteRepository.lanciatiDaPiuDiDueAnni(new java.sql.Date(date.getTime()));
+	}
+	
+	@Override
+	@Transactional
+	public List<Satellite> disattivatiMaNonRientrati() {
+		Date date = new Date();
+		return satelliteRepository.disattivatiMaNonRientrati(new java.sql.Date(date.getTime()));
 	}
 }
