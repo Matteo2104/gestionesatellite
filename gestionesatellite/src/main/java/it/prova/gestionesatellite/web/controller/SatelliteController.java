@@ -107,7 +107,7 @@ public class SatelliteController {
 	public String edit(@PathVariable(required = true) Long idSatellite, Model model) {
 		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
 		model.addAttribute("edit_satellite_attr", satellite);
-		System.out.println(satellite);
+		//System.out.println(satellite);
 		return "satellite/edit";
 	}
 	@PostMapping("/update")
@@ -123,5 +123,29 @@ public class SatelliteController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
 	}
+	
+	
+	
+	@GetMapping("/lancia/{idSatellite}")
+	public String lancia(@PathVariable(required = true) Long idSatellite, Model model) {
+		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
+		model.addAttribute("lancia_satellite_attr", satellite);
+		System.out.println(satellite);
+		return "satellite/lancia";
+	}
+	
+	@PostMapping("/throww")
+	public String throww(@RequestParam(required=true) Long idSatellite,
+			RedirectAttributes redirectAttrs) {
+		
+		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
+		satellite.setDataLancio(new Date());
+		//System.out.println(satellite);
+		satelliteService.aggiorna(satellite);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/satellite";
+	}
+	
 	
 }
