@@ -116,6 +116,12 @@ public class SatelliteController {
 
 		if (result.hasErrors())
 			return "satellite/edit";
+		
+		if (satellite.getStato().equals(Stato.DISATTIVATO) && satellite.getDataRientro()!=null && satellite.getDataRientro().compareTo(new Date()) > 0) {
+			redirectAttrs.addFlashAttribute("errorMessage", "Operazione non permessa: Non puoi disattivare un satellite in fase di rientro");
+			return "redirect:/satellite";
+
+		}
 
 		//System.out.println(satellite);
 		satelliteService.aggiorna(satellite);
@@ -139,6 +145,7 @@ public class SatelliteController {
 		
 		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
 		satellite.setDataLancio(new Date());
+		satellite.setStato(Stato.IN_MOVIMENTO);
 		//System.out.println(satellite);
 		satelliteService.aggiorna(satellite);
 
@@ -161,10 +168,13 @@ public class SatelliteController {
 		
 		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
 		satellite.setDataRientro(new Date());
+		satellite.setStato(Stato.DISATTIVATO);
 		//System.out.println(satellite);
 		satelliteService.aggiorna(satellite);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
 	}
+	
+	
 }
