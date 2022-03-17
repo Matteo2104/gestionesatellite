@@ -68,7 +68,7 @@
 												<c:if test="${satelliteItem.dataLancio==null}">
 													<a class="btn btn-warning btn-sm" href="${pageContext.request.contextPath}/satellite/lancia/${satelliteItem.id}">Lancia</a>
 												</c:if>
-												<c:if test="${satelliteItem.dataRientro==null}">
+												<c:if test="${satelliteItem.dataLancio!=null && satelliteItem.dataRientro==null}">
 													<a class="btn btn-warning btn-sm" href="${pageContext.request.contextPath}/satellite/rientra/${satelliteItem.id}">Rientra</a>
 												</c:if>
 											</td>

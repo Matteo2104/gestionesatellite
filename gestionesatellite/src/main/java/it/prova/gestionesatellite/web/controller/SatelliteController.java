@@ -125,15 +125,14 @@ public class SatelliteController {
 	}
 	
 	
-	
+	// CICLO LANCIA
 	@GetMapping("/lancia/{idSatellite}")
 	public String lancia(@PathVariable(required = true) Long idSatellite, Model model) {
 		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
 		model.addAttribute("lancia_satellite_attr", satellite);
-		System.out.println(satellite);
+		//System.out.println(satellite);
 		return "satellite/lancia";
 	}
-	
 	@PostMapping("/throww")
 	public String throww(@RequestParam(required=true) Long idSatellite,
 			RedirectAttributes redirectAttrs) {
@@ -148,4 +147,24 @@ public class SatelliteController {
 	}
 	
 	
+	// CICLO RIENTRA
+	@GetMapping("/rientra/{idSatellite}")
+	public String rientra(@PathVariable(required = true) Long idSatellite, Model model) {
+		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
+		model.addAttribute("rientra_satellite_attr", satellite);
+		//System.out.println(satellite);
+		return "satellite/rientra";
+	}
+	@PostMapping("/goback")
+	public String goback(@RequestParam(required=true) Long idSatellite,
+			RedirectAttributes redirectAttrs) {
+		
+		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
+		satellite.setDataRientro(new Date());
+		//System.out.println(satellite);
+		satelliteService.aggiorna(satellite);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/satellite";
+	}
 }
