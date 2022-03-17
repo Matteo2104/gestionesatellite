@@ -85,6 +85,9 @@ public class SatelliteServiceImpl implements SatelliteService {
 	@Transactional
 	public List<Satellite> lanciatiDaPiuDiDueAnni() {
 		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.YEAR, -2);
+		date = c.getTime();
 		return satelliteRepository.lanciatiDaPiuDiDueAnni(new java.sql.Date(date.getTime()));
 	}
 	
