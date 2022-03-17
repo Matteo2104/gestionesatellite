@@ -62,10 +62,9 @@
 				      	
 				      	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/lanciatidapiudidueanni">Satelliti lanciati da piu di 2 anni</a>
 				      	
-				      	
 				      	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/disattivatimanonrientrati">Satelliti disattivati ma non rientrati</a>
 				      	
-				      	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/search">Vai a Ricerca</a>
+				      	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/satellite/fissidadiecianni">Satelliti fissi da 10 anni</a>
 				      	
 				      
 				      </div>

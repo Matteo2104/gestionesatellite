@@ -24,5 +24,6 @@ public interface SatelliteService {
 	
 	public List<Satellite> lanciatiDaPiuDiDueAnni();
 	public List<Satellite> disattivatiMaNonRientrati();
+	public List<Satellite> fissiDaDieciAnni();
 
 }

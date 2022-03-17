@@ -192,5 +192,11 @@ public class SatelliteController {
 		model.addAttribute("satellite_list_attribute", lista);
 		return "satellite/list";
 	}
-
+	
+	@GetMapping("/fissidadiecianni")
+	public String fissiDaDieciAnni(Model model) {
+		List<Satellite> lista = satelliteService.fissiDaDieciAnni();
+		model.addAttribute("satellite_list_attribute", lista);
+		return "satellite/list";
+	}
 }

@@ -1,6 +1,7 @@
 package it.prova.gestionesatellite.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -92,5 +93,16 @@ public class SatelliteServiceImpl implements SatelliteService {
 	public List<Satellite> disattivatiMaNonRientrati() {
 		Date date = new Date();
 		return satelliteRepository.disattivatiMaNonRientrati(new java.sql.Date(date.getTime()));
+	}
+	
+	@Override
+	@Transactional
+	public List<Satellite> fissiDaDieciAnni() {
+		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.YEAR, -10);
+		date = c.getTime();
+		//System.out.println(new java.sql.Date(date.getTime()));
+		return satelliteRepository.fissiDaDieciAnni(new java.sql.Date(date.getTime()));
 	}
 }
