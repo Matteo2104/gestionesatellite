@@ -1,6 +1,7 @@
 package it.prova.gestionesatellite.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.Predicate;
@@ -74,5 +75,13 @@ public class SatelliteServiceImpl implements SatelliteService {
 			return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 		};
 		return satelliteRepository.findAll(specificationCriteria);
+	}
+	
+	
+	@Override
+	@Transactional
+	public List<Satellite> lanciatiDaPiuDiDueAnni() {
+		Date date = new Date();
+		return satelliteRepository.lanciatiDaPiuDiDueAnni(new java.sql.Date(date.getTime()));
 	}
 }

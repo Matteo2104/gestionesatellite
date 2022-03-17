@@ -18,4 +18,6 @@ public interface SatelliteService {
 
 	public void aggiorna(Satellite satellite);
 
+	public List<Satellite> lanciatiDaPiuDiDueAnni();
+
 }
