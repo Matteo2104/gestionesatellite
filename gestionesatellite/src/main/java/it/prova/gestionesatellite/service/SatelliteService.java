@@ -16,4 +16,6 @@ public interface SatelliteService {
 
 	public void rimuoviById(Long id);
 
+	public void aggiorna(Satellite satellite);
+
 }

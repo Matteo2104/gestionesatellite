@@ -27,6 +27,12 @@ public class SatelliteServiceImpl implements SatelliteService {
 	
 	@Override
 	@Transactional
+	public void aggiorna(Satellite satellite) {
+		satelliteRepository.save(satellite);
+	}
+	
+	@Override
+	@Transactional
 	public void rimuoviById(Long id) {
 		satelliteRepository.deleteById(id);
 	}

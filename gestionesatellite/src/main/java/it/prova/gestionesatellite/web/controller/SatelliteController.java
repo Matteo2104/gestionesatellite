@@ -84,7 +84,7 @@ public class SatelliteController {
 		//System.out.println(satelliteToRemove);
 		model.addAttribute("delete_satellite_attr", satelliteToRemove);
 		
-		if ( (satelliteToRemove.getDataRientro() != null && satelliteToRemove.getDataRientro().compareTo(new Date()) > 0 && satelliteToRemove.getStato().equals(Stato.DISATTIVATO)) || (satelliteToRemove.getDataLancio() == null || satelliteToRemove.getDataLancio().compareTo(new Date()) < 0) ) {
+		if ( (satelliteToRemove.getDataRientro() != null && satelliteToRemove.getDataRientro().compareTo(new Date()) < 0 && satelliteToRemove.getStato().equals(Stato.DISATTIVATO)) || (satelliteToRemove.getDataLancio() == null || satelliteToRemove.getDataLancio().compareTo(new Date()) > 0) ) {
 			return "satellite/delete";
 		} 
 		redirectAttrs.addFlashAttribute("errorMessage", "Non puoi rimuovere un satellite in orbita");
@@ -96,6 +96,29 @@ public class SatelliteController {
 		
 		//System.out.println(idImpiegato);
 		satelliteService.rimuoviById(idSatellite);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/satellite";
+	}
+	
+	
+	// CICLO AGGIORNAMENTO
+	@GetMapping("/edit/{idSatellite}")
+	public String edit(@PathVariable(required = true) Long idSatellite, Model model) {
+		Satellite satellite = satelliteService.caricaSingoloElemento(idSatellite);
+		model.addAttribute("edit_satellite_attr", satellite);
+		System.out.println(satellite);
+		return "satellite/edit";
+	}
+	@PostMapping("/update")
+	public String update(@Valid @ModelAttribute("edit_satellite_attr") Satellite satellite, BindingResult result,
+			RedirectAttributes redirectAttrs) {
+
+		if (result.hasErrors())
+			return "satellite/edit";
+
+		//System.out.println(satellite);
+		satelliteService.aggiorna(satellite);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/satellite";
