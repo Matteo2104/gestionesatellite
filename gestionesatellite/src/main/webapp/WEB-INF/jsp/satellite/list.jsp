@@ -25,6 +25,10 @@
 				  ${successMessage}
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
 				</div>
+				<div class="alert alert-warning alert-dismissible fade show  ${errorMessage==null?'d-none':'' }" role="alert">
+				  ${errorMessage}
+				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+				</div>
 				<div class="alert alert-danger alert-dismissible fade show d-none" role="alert">
 				  Esempio di operazione fallita!
 				  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
@@ -59,8 +63,8 @@
 											<td>${satelliteItem.codice }</td>
 											<td>
 												<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/satellite/show/${satelliteItem.id }">Visualizza</a>
-												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/impiegato/edit/${satelliteItem.id }">Edit</a>
-												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/impiegato/delete/${satelliteItem.id }">Delete</a>
+												<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/satellite/edit/${satelliteItem.id }">Edit</a>
+												<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/satellite/delete/${satelliteItem.id }">Delete</a>
 											</td>
 										</tr>
 									</c:forEach>

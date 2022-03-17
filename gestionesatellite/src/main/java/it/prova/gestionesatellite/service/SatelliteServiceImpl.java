@@ -26,6 +26,12 @@ public class SatelliteServiceImpl implements SatelliteService {
 	}
 	
 	@Override
+	@Transactional
+	public void rimuoviById(Long id) {
+		satelliteRepository.deleteById(id);
+	}
+	
+	@Override
 	@Transactional(readOnly = true)
 	public List<Satellite> listAllElements() {
 		return (List<Satellite>) satelliteRepository.findAll();

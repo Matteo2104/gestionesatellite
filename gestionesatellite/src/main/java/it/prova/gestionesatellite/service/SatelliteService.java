@@ -14,4 +14,6 @@ public interface SatelliteService {
 
 	public Satellite caricaSingoloElemento(Long id);
 
+	public void rimuoviById(Long id);
+
 }

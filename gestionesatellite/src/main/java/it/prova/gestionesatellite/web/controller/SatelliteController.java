@@ -1,5 +1,6 @@
 package it.prova.gestionesatellite.web.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.prova.gestionesatellite.model.Satellite;
+import it.prova.gestionesatellite.model.Stato;
 import it.prova.gestionesatellite.service.SatelliteService;
 
 @Controller
@@ -72,4 +75,30 @@ public class SatelliteController {
 		model.addAttribute("show_satellite_attr", satelliteService.caricaSingoloElemento(idSatellite));
 		return "satellite/show";
 	}
+	
+	
+	// CICLO RIMOZIONE
+	@GetMapping("/delete/{idSatellite}")
+	public String delete(@PathVariable(required = true) Long idSatellite, Model model, RedirectAttributes redirectAttrs) {
+		Satellite satelliteToRemove = satelliteService.caricaSingoloElemento(idSatellite);
+		//System.out.println(satelliteToRemove);
+		model.addAttribute("delete_satellite_attr", satelliteToRemove);
+		
+		if ( (satelliteToRemove.getDataRientro() != null && satelliteToRemove.getDataRientro().compareTo(new Date()) > 0 && satelliteToRemove.getStato().equals(Stato.DISATTIVATO)) || (satelliteToRemove.getDataLancio() == null || satelliteToRemove.getDataLancio().compareTo(new Date()) < 0) ) {
+			return "satellite/delete";
+		} 
+		redirectAttrs.addFlashAttribute("errorMessage", "Non puoi rimuovere un satellite in orbita");
+		return "redirect:/satellite";
+	}
+	@PostMapping("/remove")
+	public String remove(@RequestParam(required = true) Long idSatellite,
+			RedirectAttributes redirectAttrs) {
+		
+		//System.out.println(idImpiegato);
+		satelliteService.rimuoviById(idSatellite);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/satellite";
+	}
+	
 }
