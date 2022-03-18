@@ -57,11 +57,16 @@ public class SatelliteController {
 		return "satellite/insert";
 	}
 	@PostMapping("/save")
-	public String save(@Valid @ModelAttribute("insert_satellite_attr") Satellite satellite, BindingResult result,
+	public String save(@Valid @ModelAttribute("insert_satellite_attr") Satellite satellite, Model model, BindingResult result,
 			RedirectAttributes redirectAttrs) {
 
 		if (result.hasErrors())
 			return "satellite/insert";
+		
+		if (satellite.getDataLancio() != null && satellite.getDataRientro() != null && satellite.getDataLancio().compareTo(satellite.getDataRientro()) > 0) {
+			model.addAttribute("errorMessage", "Operazione non permessa: Non puoi inserire una data di rientro antecedente alla data di lancio");
+			return "satellite/insert";
+		}
 
 		satelliteService.aggiungiNuovo(satellite);
 
